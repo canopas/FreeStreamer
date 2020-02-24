@@ -98,7 +98,7 @@ Audio_Stream::Audio_Stream() :
     m_audioConverter(0),
     m_initializationError(noErr),
     m_outputBufferSize(Stream_Configuration::configuration()->bufferSize),
-    m_outputBuffer(new UInt8[m_outputBufferSize]),
+    m_outputBuffer(new float[m_outputBufferSize]),
     m_packetIdentifier(0),
     m_playingPacketIdentifier(0),
     m_dataOffset(0),
@@ -1712,17 +1712,17 @@ void Audio_Stream::decodeSinglePacket(CFRunLoopTimerRef timer, void *info)
         
         pthread_mutex_unlock(&THIS->m_streamStateMutex);
         
-        // This blocks until the queue has been able to consume the packets
-        THIS->audioQueue()->handleAudioPackets(outputBufferList.mBuffers[0].mDataByteSize,
-                                         outputBufferList.mNumberBuffers,
-                                         outputBufferList.mBuffers[0].mData,
-                                         &description);
-        
         const UInt32 nFrames = outputBufferList.mBuffers[0].mDataByteSize / THIS->m_dstFormat.mBytesPerFrame;
         
         if (THIS->m_delegate) {
             THIS->m_delegate->samplesAvailable(&outputBufferList, nFrames, description);
         }
+        
+        // This blocks until the queue has been able to consume the packets
+        THIS->audioQueue()->handleAudioPackets(outputBufferList.mBuffers[0].mDataByteSize,
+                                         outputBufferList.mNumberBuffers,
+                                         outputBufferList.mBuffers[0].mData,
+                                         &description);
         
         Stream_Configuration *config = Stream_Configuration::configuration();
         

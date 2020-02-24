@@ -158,7 +158,7 @@ private:
     OSStatus m_initializationError;
     
     UInt32 m_outputBufferSize;
-    UInt8 *m_outputBuffer;
+    float *m_outputBuffer;
     
     UInt64 m_packetIdentifier;
     UInt64 m_playingPacketIdentifier;

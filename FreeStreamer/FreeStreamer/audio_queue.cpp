@@ -111,7 +111,7 @@ void Audio_Queue::start()
     
 void Audio_Queue::pause()
 {
-    if (m_state == RUNNING) {
+    if (m_state == RUNNING | m_state == IDLE) {
         if (AudioQueuePause(m_outAQ) != 0) {
             AQ_TRACE("%s: AudioQueuePause failed!\n", __PRETTY_FUNCTION__);
         }

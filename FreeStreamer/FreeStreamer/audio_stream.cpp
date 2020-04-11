@@ -957,6 +957,11 @@ void Audio_Stream::audioQueueInitializationFailed()
 void Audio_Stream::audioQueueFinishedPlayingPacket()
 {
 }
+
+AudioQueueRef Audio_Stream::getAudioQueueRef()
+{
+    return audioQueue()->m_outAQ;
+}
     
 void Audio_Stream::streamIsReadyRead()
 {

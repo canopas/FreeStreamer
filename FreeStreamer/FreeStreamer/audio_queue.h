@@ -19,7 +19,8 @@ struct queued_packet;
 class Audio_Queue {
 public:
     Audio_Queue_Delegate *m_delegate;
-    
+    AudioQueueRef m_outAQ;                                           // the audio queue
+
     enum State {
         IDLE,
         RUNNING,
@@ -55,7 +56,6 @@ private:
     
     State m_state;
     
-    AudioQueueRef m_outAQ;                                           // the audio queue
     
     AudioQueueBufferRef *m_audioQueueBuffer;              // audio queue buffers
     AudioStreamPacketDescription *m_packetDescs; // packet descriptions for enqueuing audio

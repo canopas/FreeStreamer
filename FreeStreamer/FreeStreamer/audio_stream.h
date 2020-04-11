@@ -123,6 +123,7 @@ public:
     void streamErrorOccurred(CFStringRef errorDesc);
     void streamMetaDataAvailable(std::map<CFStringRef,CFStringRef> metaData);
     void streamMetaDataByteSizeAvailable(UInt32 sizeInBytes);
+    AudioQueueRef getAudioQueueRef();
 
 private:
     

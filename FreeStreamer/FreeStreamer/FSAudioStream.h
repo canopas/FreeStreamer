@@ -7,12 +7,12 @@
  */
 
 #import <Foundation/Foundation.h>
+#include <AudioToolbox/AudioToolbox.h> /* AudioFileStreamID */
 #if (defined(TARGET_OS_MACCATALYST) && TARGET_OS_MACCATALYST)
 #import <CoreAudioTypes/CoreAudioBaseTypes.h>
 #else
 #import <CoreAudio/CoreAudioTypes.h>
 #endif
-
 /**
  * The major version of the current release.
  */
@@ -440,6 +440,11 @@ NSString*             freeStreamerReleaseVersion(void);
  * Cleans all cached data from the persistent storage.
  */
 - (void)expungeCache;
+
+/**
+ * Cleans all cached data from the persistent storage.
+ */
+- (AudioQueueRef)getAudioQueueRef;
 
 /**
  * The stream URL.

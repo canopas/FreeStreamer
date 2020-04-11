@@ -289,6 +289,7 @@ public:
 - (UInt64)audioDataByteCount;
 - (float)durationInSeconds;
 - (void)bitrateAvailable;
+- (AudioQueueRef)getAudioQueueRef;
 @end
 
 @implementation FSAudioStreamPrivate
@@ -651,6 +652,11 @@ public:
 - (float)bitRate
 {
     return _audioStream->bitrate();
+}
+
+- (AudioQueueRef)getAudioQueueRef
+{
+    return _audioStream->getAudioQueueRef();
 }
 
 - (FSStreamConfiguration *)configuration
@@ -1337,6 +1343,11 @@ public:
     NSAssert([NSThread isMainThread], @"FSAudioStream.setStrictContentTypeChecking needs to be called in the main thread");
     
     [_private setStrictContentTypeChecking:strictContentTypeChecking];
+}
+
+- (AudioQueueRef)getAudioQueueRef
+{
+    return [_private getAudioQueueRef];
 }
 
 - (BOOL)strictContentTypeChecking
